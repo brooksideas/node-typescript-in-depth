@@ -2,10 +2,10 @@
   "name": "typescript-in-depth",
   "version": "1.0.0",
   "description": "Node.JS with Typescript Awesome reusable implementation",
-  "main": "server.ts",
+  "main": "build/server.js",
   "scripts": {
     "build": "rm -rf build/ && tsc",
-    "start": "node build/server.js",
+    "start": "rm -rf build/ && tsc && node build/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
