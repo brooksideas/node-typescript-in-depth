@@ -8,11 +8,9 @@ const http_1 = __importDefault(require("http"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = require("./config/config");
 const Logging_1 = __importDefault(require("./library/Logging"));
-// import authorRoutes from './routes/Author';
+const AuthorRouter_1 = __importDefault(require("./routes/AuthorRouter"));
 // import bookRoutes from './routes/Book';
 const router = (0, express_1.default)();
-Logging_1.default.info('Mongo connected FIRST.');
-Logging_1.default.info(typeof config_1.config.mongo.url);
 /** Connect to Mongo config.mongo.url*/
 mongoose_1.default
     .connect(config_1.config.mongo.url, { retryWrites: true, w: 'majority' })
@@ -26,7 +24,7 @@ const StartServer = () => {
     /** Log the request */
     router.use((req, res, next) => {
         /** Log the req */
-        Logging_1.default.info(`Incomming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
+        Logging_1.default.info(`Incoming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
         res.on('finish', () => {
             /** Log the res */
             Logging_1.default.info(`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`);
@@ -45,9 +43,9 @@ const StartServer = () => {
         }
         next();
     });
-    /** Routes
-    router.use('/authors', authorRoutes);
-    router.use('/books', bookRoutes);*/
+    /** Routes */
+    router.use('/authors', AuthorRouter_1.default);
+    // router.use('/books', bookRoutes);
     /** Healthcheck */
     router.get('/ping', (req, res, next) => res.status(200).json({ health: 'API Health is Good!' }));
     /** Error handling */
