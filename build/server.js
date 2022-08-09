@@ -9,7 +9,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = require("./config/config");
 const Logging_1 = __importDefault(require("./library/Logging"));
 const AuthorRouter_1 = __importDefault(require("./routes/AuthorRouter"));
-// import bookRoutes from './routes/Book';
+const BookRouter_1 = __importDefault(require("./routes/BookRouter"));
 const router = (0, express_1.default)();
 /** Connect to Mongo config.mongo.url*/
 mongoose_1.default
@@ -45,7 +45,7 @@ const StartServer = () => {
     });
     /** Routes */
     router.use('/authors', AuthorRouter_1.default);
-    // router.use('/books', bookRoutes);
+    router.use('/books', BookRouter_1.default);
     /** Healthcheck */
     router.get('/ping', (req, res, next) => res.status(200).json({ health: 'API Health is Good!' }));
     /** Error handling */

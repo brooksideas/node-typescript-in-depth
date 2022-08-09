@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import { config } from './config/config';
 import Logging from './library/Logging';
 import authorRoutes from './routes/AuthorRouter';
-// import bookRoutes from './routes/Book';
+import bookRoutes from './routes/BookRouter';
 
 const router = express();
 
@@ -50,7 +50,7 @@ const StartServer = () => {
 
     /** Routes */
     router.use('/authors', authorRoutes);
-    // router.use('/books', bookRoutes);
+    router.use('/books', bookRoutes);
 
     /** Healthcheck */
     router.get('/ping', (req, res, next) => res.status(200).json({ health: 'API Health is Good!' }));
