@@ -7,6 +7,7 @@ import Logging from './library/Logging';
 import authorRoutes from './routes/AuthorRouter';
 import bookRoutes from './routes/BookRouter';
 import userRoutes from './routes/UserRouter';
+import flowerRoutes from './routes/FlowerRouter';
 
 const router = express();
 
@@ -54,6 +55,7 @@ const StartServer = () => {
     router.use('/authors', authorRoutes);
     router.use('/books', bookRoutes);
     router.use('/users', userRoutes);
+    router.use('/flowers', flowerRoutes);
 
     /** Healthcheck */
     router.get('/ping', (req: Request, res: Response, next: NextFunction) => res.status(200).json({ health: 'API Health is Good!' }));

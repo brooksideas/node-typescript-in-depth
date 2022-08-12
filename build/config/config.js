@@ -14,3 +14,4 @@ exports.config = {
     mongo: { url: MONGO_URL },
     server: { port: SERVER_PORT }
 };
+//# sourceMappingURL=config.js.map
