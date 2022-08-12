@@ -1,10 +1,12 @@
 import express from 'express';
+import { NextFunction, Request, Response } from "express";
 import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config/config';
 import Logging from './library/Logging';
 import authorRoutes from './routes/AuthorRouter';
 import bookRoutes from './routes/BookRouter';
+import userRoutes from './routes/UserRouter';
 
 const router = express();
 
@@ -20,7 +22,7 @@ mongoose
 /** Only Start Server if Mongoose Connects */
 const StartServer = () => {
     /** Log the request */
-    router.use((req, res, next) => {
+    router.use((req: Request, res: Response, next: NextFunction) => {
         /** Log the req */
         Logging.info(`Incoming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
@@ -36,7 +38,7 @@ const StartServer = () => {
     router.use(express.json());
 
     /** Rules of our API */
-    router.use((req, res, next) => {
+    router.use((req: Request, res: Response, next) => {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
@@ -51,12 +53,13 @@ const StartServer = () => {
     /** Routes */
     router.use('/authors', authorRoutes);
     router.use('/books', bookRoutes);
+    router.use('/users', userRoutes);
 
     /** Healthcheck */
-    router.get('/ping', (req, res, next) => res.status(200).json({ health: 'API Health is Good!' }));
+    router.get('/ping', (req: Request, res: Response, next: NextFunction) => res.status(200).json({ health: 'API Health is Good!' }));
 
     /** Error handling */
-    router.use((req, res, next) => {
+    router.use((req: Request, res: Response, next: NextFunction) => {
         const error = new Error('Not found');
 
         Logging.error(error);

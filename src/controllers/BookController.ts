@@ -1,22 +1,24 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import Book from '../models/Book';
+import User from '../models/User';
 
 // CRUD
 
 // Create
 const createBook = (req: Request, res: Response, next: NextFunction) => {
-    const { title, author } = req.body;
+    const { title, author, userId, name, username, email } = req.body;
 
     const book = new Book({
         _id: new mongoose.Types.ObjectId(),
-        title, author
+        title, author, owner: userId
     });
 
     return book
         .save()
-        .then((book) => res.status(201).json({ book }))
+        .then((book) => res.status(200).json({ book }))
         .catch((error) => res.status(500).json(error))
+
 };
 
 // Read
