@@ -19,11 +19,13 @@
   },
   "homepage": "https://github.com/brooksideas/node-typescript-in-depth#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "chalk": "^4.1.2",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "joi": "^17.6.0",
     "mongoose": "^6.5.1",
+    "mongoose-auto-increment": "^5.0.1",
     "typescript": "^4.7.4"
   },
   "devDependencies": {

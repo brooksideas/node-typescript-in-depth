@@ -12,6 +12,7 @@ const AuthorRouter_1 = __importDefault(require("./routes/AuthorRouter"));
 const BookRouter_1 = __importDefault(require("./routes/BookRouter"));
 const UserRouter_1 = __importDefault(require("./routes/UserRouter"));
 const FlowerRouter_1 = __importDefault(require("./routes/FlowerRouter"));
+const CustomerRouter_1 = __importDefault(require("./routes/CustomerRouter"));
 const router = (0, express_1.default)();
 /** Connect to Mongo config.mongo.url*/
 mongoose_1.default
@@ -50,6 +51,7 @@ const StartServer = () => {
     router.use('/books', BookRouter_1.default);
     router.use('/users', UserRouter_1.default);
     router.use('/flowers', FlowerRouter_1.default);
+    router.use('/customers', CustomerRouter_1.default);
     /** Healthcheck */
     router.get('/ping', (req, res, next) => res.status(200).json({ health: 'API Health is Good!' }));
     /** Error handling */
